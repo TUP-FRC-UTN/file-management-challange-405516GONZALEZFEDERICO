@@ -1,0 +1,31 @@
+<div class="h-100 w-100 container mt-3 ms-1 me-1">
+    <table class="table table-hover">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Dueños</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (file of getFilteredFiles(); track file) {
+        <tr>
+            <td>
+            <input type="checkbox" [checked]="isFileSelected(file.id)" (change)="toggleFileSelection(file.id)">
+            </td>
+            <td [title]="file.name">{{ truncateFileName(file.name) }}</td>
+            <td>{{ file.creation | date: 'MMM d, yyyy' }}</td>
+            <td>
+            @for (owner of file.owners.slice(0, 3); track owner) {
+                <img [src]="owner.avatarUrl" class="owner-avatar ms-1 mb-1" [alt]="owner.name">
+            }
+            @if (getExtraOwnersCount(file) > 0) {
+                <span class="extra-owners-count">+{{ getExtraOwnersCount(file) }}</span>
+            }
+            </td>
+        </tr>
+        }
+    </tbody>
+    </table>
+</div>

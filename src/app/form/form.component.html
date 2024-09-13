@@ -1,0 +1,47 @@
+<form #form="ngForm" (ngSubmit)="save(form)" class="ms-3 me-3 mb-3">
+    <div class="mb-3">
+    <label for="name" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="name" name="name" ngModel placeholder="Ingrese el nombre" required
+            [ngClass]="{'is-valid': form.submitted && form.controls['name'].valid,
+                        'is-invalid': form.submitted && !form.controls['name'].valid}">
+    </div>
+    <div class="mb-3">
+    <label for="date" class="form-label">Fecha</label>
+    <input type="date" class="form-control" id="date" name="date" ngModel required
+            [ngClass]="{'is-valid': form.submitted && form.controls['date'].valid,
+                        'is-invalid': form.submitted && !form.controls['date'].valid}">
+    </div>
+    <div class="mb-3">
+    <label for="fileType" class="form-label">Tipo Archivo</label>
+    <select class="form-select" id="fileType" name="fileType" ngModel required
+            [ngClass]="{'is-valid': form.submitted && form.controls['fileType'].valid,
+                        'is-invalid': form.submitted && !form.controls['fileType'].valid}">
+        @for (fileType of fileTypes; track fileType) {
+        <option [value]="fileType">{{fileType}}</option>
+        }
+    </select>
+    </div>
+    <div class="mb-3">
+    <label for="folder" class="form-label">Carpeta/Archivo</label>
+    <select class="form-select" id="folder" name="folder" ngModel>
+        @for (file of files; track file) {
+        <option [value]="file.id">{{file.name}}</option>
+        }
+    </select>
+    </div>
+
+    <div class="mb-3">
+    <label for="owners" class="form-label">Dueños</label>
+    <div class="input-group">
+        <select class="form-select" id="owners" name="owners" ngModel>
+            @for (owner of owners; track owner) {
+            <option [value]="owner.avatarUrl">{{owner.name}}</option>
+            }
+        </select>
+        <button class="btn btn-outline-secondary ms-2" type="button" name="botonAdd">+</button>
+    </div>
+    </div>
+    <div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+</form>

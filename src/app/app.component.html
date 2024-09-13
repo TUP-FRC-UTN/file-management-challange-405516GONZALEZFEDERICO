@@ -1,1 +1,28 @@
-add code here!!
+<div class="d-flex align-items-center justify-content-center mt-1 mb-1">
+    <div class="card h-100 w-75">
+    <div class="card-body">
+        <nav class="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand">Archivos</a>
+            <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle me-4" type="button" id="accion" data-bs-toggle="dropdown">
+                Acciones
+            </button>
+            <ul class="dropdown-menu">
+                <li (click)="onHideList()"><a class="dropdown-item" href="#">Nuevo</a></li>
+                <li (click)="deleteSelectedFiles()"><a class="dropdown-item" href="#" [class.disabled]="selectedFiles.length === 0">Borrar</a></li>
+            </ul>
+            </div>
+        </div>
+        </nav>
+    </div>
+    <hr class="custom-hr">
+    <div>
+        @if (estadoComponente === true) {
+        <app-form [files]="files" (onSave)="receptFormValue($event)"></app-form>
+        }@else {
+        <app-repository [files]="files" (filesSelected)="onFilesSelected($event)"></app-repository>
+        }
+    </div>
+    </div>
+</div>
